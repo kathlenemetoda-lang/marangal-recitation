@@ -1,924 +1,942 @@
 <!DOCTYPE html>
+
 <html lang="en">
 
 <head>
 
-  <meta charset="UTF-8">
+<meta charset="UTF-8">
 
-  <meta
-    name="viewport"
-    content="width=device-width, initial-scale=1.0"
-  >
+<meta name="viewport"
+      content="width=device-width, initial-scale=1.0">
 
-  <title>Grade 10 Marangal – Term 2 Recitation</title>
+<title>
+Grade 10 – Marangal Term 2 Recitation
+</title>
 
-  <!-- QR SCANNER -->
-  <script src="https://unpkg.com/html5-qrcode"></script>
 
-  <style>
+<!-- QR SCANNER LIBRARY -->
 
-    * {
-      box-sizing: border-box;
-    }
+<script src="https://unpkg.com/html5-qrcode"
+        type="text/javascript">
+</script>
+
+
+<style>
+
+* {
+    box-sizing: border-box;
+}
+
+
+body {
+
+    margin: 0;
+
+    padding: 20px;
+
+    font-family:
+        Arial,
+        Helvetica,
+        sans-serif;
+
+    background:
+        #f3f3f3;
+
+    color:
+        #111;
+
+}
+
+
+.container {
+
+    width: 100%;
+
+    max-width: 970px;
+
+    margin: auto;
+
+}
+
+
+/* HEADER */
+
+.header {
+
+    background: white;
+
+    border-radius: 28px;
+
+    padding: 42px 25px;
+
+    text-align: center;
+
+    box-shadow:
+        0 8px 25px rgba(0,0,0,0.08);
+
+    margin-bottom: 30px;
+
+}
+
+
+.header h1 {
+
+    margin: 0;
+
+    font-size: 42px;
+
+}
+
+
+.header h2 {
+
+    margin: 15px 0 0;
+
+    font-size: 32px;
+
+    font-weight: 400;
+
+    color: #666;
+
+}
+
+
+/* CAMERA */
+
+.card {
+
+    background: white;
+
+    border-radius: 28px;
+
+    padding: 30px;
+
+    box-shadow:
+        0 8px 25px rgba(0,0,0,0.08);
+
+    margin-bottom: 25px;
+
+}
+
+
+#reader {
+
+    width: 100%;
+
+    max-width: 650px;
+
+    margin: auto;
+
+}
+
+
+/* STATUS */
+
+.status {
+
+    display: none;
+
+    padding: 22px;
+
+    border-radius: 18px;
+
+    text-align: center;
+
+    font-size: 22px;
+
+    font-weight: bold;
+
+    margin-bottom: 20px;
+
+}
+
+
+.status.error {
+
+    display: block;
+
+    background: #f8d7da;
+
+    color: #842029;
+
+}
+
+
+.status.success {
+
+    display: block;
+
+    background: #d1e7dd;
+
+    color: #0f5132;
+
+}
+
+
+.status.info {
+
+    display: block;
+
+    background: #fff3cd;
+
+    color: #664d03;
+
+}
+
+
+/* STUDENT */
+
+.student {
+
+    display: none;
+
+}
+
+
+.student.show {
+
+    display: block;
+
+}
+
+
+.student-box {
+
+    background: #f8f9fa;
+
+    border-radius: 20px;
+
+    padding: 25px;
+
+    margin-bottom: 20px;
+
+}
+
+
+.label {
+
+    font-size: 15px;
+
+    color: #777;
+
+    margin-top: 10px;
+
+}
+
+
+.value {
+
+    font-size: 26px;
+
+    font-weight: bold;
+
+    margin-top: 4px;
+
+    word-break: break-word;
+
+}
+
+
+/* BUTTON */
+
+button {
+
+    width: 100%;
+
+    border: none;
+
+    border-radius: 18px;
+
+    padding: 22px;
+
+    font-size: 23px;
+
+    font-weight: bold;
+
+    cursor: pointer;
+
+    background: #198754;
+
+    color: white;
+
+}
+
+
+button:hover {
+
+    opacity: 0.9;
+
+}
+
+
+button:disabled {
+
+    background: #999;
+
+    cursor: not-allowed;
+
+}
+
+
+/* RESET */
+
+.reset {
+
+    background: #555;
+
+    margin-top: 12px;
+
+}
+
+
+/* MOBILE */
+
+@media (max-width: 600px) {
 
     body {
-      margin: 0;
-      font-family: Arial, Helvetica, sans-serif;
-      background: #f4f4f4;
-      color: #222;
-    }
-
-    .container {
-      width: 100%;
-      max-width: 520px;
-      margin: auto;
-      padding: 18px;
+        padding: 10px;
     }
 
     .header {
-      background: white;
-      border-radius: 18px;
-      padding: 22px;
-      text-align: center;
-      margin-bottom: 15px;
-      box-shadow: 0 3px 12px rgba(0,0,0,0.08);
+        padding: 30px 15px;
     }
 
     .header h1 {
-      margin: 0;
-      font-size: 24px;
+        font-size: 30px;
     }
 
-    .header p {
-      margin: 8px 0 0;
-      color: #666;
-      font-size: 17px;
+    .header h2 {
+        font-size: 23px;
     }
 
-    .scanner-card {
-      background: white;
-      border-radius: 18px;
-      padding: 15px;
-      box-shadow: 0 3px 12px rgba(0,0,0,0.08);
-    }
-
-    #reader {
-      width: 100%;
-    }
-
-    .status {
-      text-align: center;
-      padding: 13px;
-      margin-top: 12px;
-      border-radius: 10px;
-      font-weight: bold;
-      background: #fff3cd;
-      color: #856404;
-    }
-
-    .status.success {
-      background: #d4edda;
-      color: #155724;
-    }
-
-    .status.error {
-      background: #f8d7da;
-      color: #721c24;
-    }
-
-    .student-card {
-      display: none;
-      background: white;
-      margin-top: 15px;
-      padding: 20px;
-      border-radius: 18px;
-      box-shadow: 0 3px 12px rgba(0,0,0,0.08);
-    }
-
-    .student-card.show {
-      display: block;
-    }
-
-    .label {
-      font-size: 12px;
-      color: #777;
-      margin-top: 10px;
+    .card {
+        padding: 18px;
     }
 
     .value {
-      font-size: 18px;
-      font-weight: bold;
-      margin-top: 3px;
+        font-size: 21px;
     }
 
-    .point-button {
-      width: 100%;
-      margin-top: 20px;
-      padding: 17px;
-      border: none;
-      border-radius: 14px;
-      background: #222;
-      color: white;
-      font-size: 18px;
-      font-weight: bold;
-      cursor: pointer;
+    button {
+        font-size: 20px;
     }
 
-    .point-button:disabled {
-      background: #aaa;
-      cursor: not-allowed;
-    }
+}
 
-    .points {
-      text-align: center;
-      margin-top: 15px;
-      font-size: 17px;
-      font-weight: bold;
-    }
-
-    .help {
-      margin-top: 15px;
-      padding: 13px;
-      border-radius: 10px;
-      background: #fff8e1;
-      color: #6d5b00;
-      font-size: 14px;
-      text-align: center;
-    }
-
-  </style>
+</style>
 
 </head>
 
 
 <body>
 
+
 <div class="container">
 
 
-  <!-- HEADER -->
+    <!-- HEADER -->
 
-  <div class="header">
+    <div class="header">
 
-    <h1>
-      📚 Grade 10 – Marangal
-    </h1>
+        <h1>
+            📚 Grade 10 – Marangal
+        </h1>
 
-    <p>
-      Term 2 Recitation Points
-    </p>
+        <h2>
+            Term 2 Recitation Points
+        </h2>
 
-  </div>
-
-
-  <!-- QR SCANNER -->
-
-  <div class="scanner-card">
-
-    <div id="reader"></div>
-
-    <div
-      id="status"
-      class="status"
-    >
-      📷 Starting QR Scanner...
-    </div>
-
-  </div>
-
-
-  <!-- STUDENT INFORMATION -->
-
-  <div
-    id="studentCard"
-    class="student-card"
-  >
-
-    <div class="label">
-      STUDENT ID
-    </div>
-
-    <div
-      id="studentId"
-      class="value"
-    >
-      —
     </div>
 
 
-    <div class="label">
-      NAME
-    </div>
 
-    <div
-      id="studentName"
-      class="value"
-    >
-      —
-    </div>
+    <!-- CAMERA -->
+
+    <div class="card">
+
+        <div id="status"
+             class="status info">
+
+            📷 Starting camera...
+
+        </div>
 
 
-    <div class="label">
-      SECTION
-    </div>
+        <div id="reader"></div>
 
-    <div
-      id="studentSection"
-      class="value"
-    >
-      —
     </div>
 
 
-    <div
-      id="pointsDisplay"
-      class="points"
-    >
+
+    <!-- STUDENT INFORMATION -->
+
+    <div id="studentCard"
+         class="card student">
+
+
+        <div class="student-box">
+
+
+            <div class="label">
+                STUDENT ID
+            </div>
+
+            <div id="studentId"
+                 class="value">
+            </div>
+
+
+            <div class="label">
+                NAME
+            </div>
+
+            <div id="studentName"
+                 class="value">
+            </div>
+
+
+            <div class="label">
+                SECTION
+            </div>
+
+            <div id="section"
+                 class="value">
+            </div>
+
+
+            <div class="label">
+                TERM 2 RECITATION POINTS
+            </div>
+
+            <div id="points"
+                 class="value">
+                —
+            </div>
+
+        </div>
+
+
+
+        <button id="addButton"
+                onclick="addPoint()">
+
+            ➕ +1 RECITATION POINT
+
+        </button>
+
+
+        <button class="reset"
+                onclick="resetScanner()">
+
+            🔄 SCAN ANOTHER STUDENT
+
+        </button>
+
+
     </div>
-
-
-    <!-- ADD POINT BUTTON -->
-
-    <button
-      id="pointButton"
-      class="point-button"
-      disabled
-      onclick="addPoint()"
-    >
-
-      +1 RECITATION POINT
-
-    </button>
-
-  </div>
-
-
-  <div class="help">
-
-    📱 Please allow camera access when your browser asks.
-
-    <br><br>
-
-    Scan the student's QR code to display their information.
-
-  </div>
 
 
 </div>
 
 
+
 <script>
 
 
-/*
-==================================================
-GOOGLE APPS SCRIPT WEB APP
-==================================================
-*/
+/* =========================================================
+   CONFIGURATION
+   ========================================================= */
+
 
 const API_URL =
-  'https://script.google.com/macros/s/AKfycbwkvTyEFdtkxzmUa372TpCNbMByAc-_h89ooxydU_D68S43eEx6S15QZb7mJAwITTKZ3g/exec';
+"https://script.google.com/macros/s/AKfycbwkvTyEFdtkxzmUa372TpCNbMByAc-_h89ooxydU_D68S43eEx6S15QZb7mJAwITTKZ3g/exec";
 
-
-/*
-==================================================
-VARIABLES
-==================================================
-*/
 
 let scanner = null;
-
-let currentStudentId = '';
 
 let currentStudent = null;
 
 let scanningLocked = false;
 
 
-/*
-==================================================
-STATUS
-==================================================
-*/
 
-function setStatus(message, type = '') {
-
-  const status =
-    document.getElementById('status');
-
-  status.textContent = message;
-
-  status.className =
-    'status ' + type;
-
-}
+/* =========================================================
+   STATUS
+   ========================================================= */
 
 
-/*
-==================================================
-START QR SCANNER
-==================================================
-*/
+function showStatus(message, type) {
 
-function startScanner() {
+    const status =
+        document.getElementById("status");
 
-  scanner =
-    new Html5Qrcode('reader');
+    status.textContent = message;
 
-
-  const config = {
-
-    fps: 10,
-
-    qrbox: {
-      width: 250,
-      height: 250
-    },
-
-    aspectRatio: 1.0
-
-  };
-
-
-  scanner.start(
-
-    {
-      facingMode: {
-        ideal: 'environment'
-      }
-    },
-
-    config,
-
-    onScanSuccess,
-
-    onScanFailure
-
-  )
-
-  .then(function() {
-
-    setStatus(
-      '📷 Ready — scan a student QR code.'
-    );
-
-  })
-
-  .catch(function(error) {
-
-    console.error(error);
-
-    setStatus(
-      '⚠️ Camera could not start. Please allow camera permission and reload the page.',
-      'error'
-    );
-
-  });
+    status.className =
+        "status " + type;
 
 }
 
 
-/*
-==================================================
-QR SCAN SUCCESS
-==================================================
-*/
 
-function onScanSuccess(decodedText) {
-
-  if (scanningLocked) {
-    return;
-  }
+/* =========================================================
+   JSONP REQUEST
+   ========================================================= */
 
 
-  scanningLocked = true;
+function apiRequest(action, studentId, callback) {
 
 
-  const studentId =
-    String(decodedText || '').trim();
+    const callbackName =
+        "apiCallback_" +
+        Date.now() +
+        "_" +
+        Math.floor(Math.random() * 100000);
 
 
-  if (!studentId) {
-
-    scanningLocked = false;
-
-    return;
-
-  }
+    const script =
+        document.createElement("script");
 
 
-  setStatus(
-    '🔎 Reading student information...'
-  );
+    const timeout =
+        setTimeout(function() {
+
+            cleanup();
+
+            callback({
+                success: false,
+                error:
+                    "The server took too long to respond."
+            });
+
+        }, 15000);
 
 
-  /*
-   * Pause scanner while looking up student
-   */
 
-  try {
+    function cleanup() {
 
-    if (scanner) {
-      scanner.pause(true);
+        clearTimeout(timeout);
+
+        delete window[callbackName];
+
+        if (script.parentNode) {
+
+            script.parentNode.removeChild(script);
+
+        }
+
     }
 
-  } catch (error) {
-
-    console.log(error);
-
-  }
 
 
-  lookupStudent(studentId);
+    window[callbackName] =
+        function(result) {
+
+            cleanup();
+
+            callback(result);
+
+        };
+
+
+
+    script.onerror =
+        function() {
+
+            cleanup();
+
+            callback({
+
+                success: false,
+
+                error:
+                    "Could not connect to the Google Sheet server."
+
+            });
+
+        };
+
+
+
+    script.src =
+        API_URL +
+        "?action=" +
+        encodeURIComponent(action) +
+        "&studentId=" +
+        encodeURIComponent(studentId) +
+        "&callback=" +
+        encodeURIComponent(callbackName) +
+        "&t=" +
+        Date.now();
+
+
+    document.body.appendChild(script);
 
 }
 
 
-/*
-==================================================
-QR SCAN FAILURE
-==================================================
-*/
 
-function onScanFailure(error) {
+/* =========================================================
+   LOOKUP STUDENT
+   ========================================================= */
 
-  /*
-   * Nothing needed here.
-   *
-   * The scanner continuously checks the camera.
-   */
-
-}
-
-
-/*
-==================================================
-LOOK UP STUDENT
-==================================================
-*/
 
 function lookupStudent(studentId) {
 
 
-  const callbackName =
-    'studentLookup_' +
-    Date.now();
+    showStatus(
+        "🔎 Looking up student...",
+        "info"
+    );
 
 
-  window[callbackName] =
-    function(data) {
+    apiRequest(
+        "lookup",
+        studentId,
+        function(result) {
 
-      try {
+
+            if (!result.success) {
+
+                showStatus(
+                    "❌ " + result.error,
+                    "error"
+                );
+
+                scanningLocked = false;
+
+                return;
+
+            }
 
 
-        /*
-         * ERROR
-         */
+            currentStudent = result;
 
-        if (!data || !data.success) {
 
-          showError(
-            data && data.error
-              ? data.error
-              : 'Student ID not found.'
-          );
+            document.getElementById(
+                "studentId"
+            ).textContent =
+                result.studentId;
 
-          return;
+
+            document.getElementById(
+                "studentName"
+            ).textContent =
+                result.studentName;
+
+
+            document.getElementById(
+                "section"
+            ).textContent =
+                result.section;
+
+
+            document.getElementById(
+                "points"
+            ).textContent =
+                "Ready to add";
+
+
+            document.getElementById(
+                "studentCard"
+            ).classList.add("show");
+
+
+            showStatus(
+                "✅ Student found!",
+                "success"
+            );
+
 
         }
-
-
-        /*
-         * SAVE STUDENT
-         */
-
-        currentStudentId =
-          data.studentId;
-
-        currentStudent =
-          data;
-
-
-        /*
-         * DISPLAY STUDENT ID
-         */
-
-        document.getElementById(
-          'studentId'
-        ).textContent =
-          data.studentId;
-
-
-        /*
-         * DISPLAY NAME
-         */
-
-        document.getElementById(
-          'studentName'
-        ).textContent =
-          data.studentName;
-
-
-        /*
-         * DISPLAY SECTION
-         */
-
-        document.getElementById(
-          'studentSection'
-        ).textContent =
-          data.section;
-
-
-        /*
-         * DISPLAY CARD
-         */
-
-        document.getElementById(
-          'studentCard'
-        ).classList.add('show');
-
-
-        /*
-         * ENABLE BUTTON
-         */
-
-        const button =
-          document.getElementById(
-            'pointButton'
-          );
-
-        button.disabled = false;
-
-        button.textContent =
-          '+1 RECITATION POINT';
-
-
-        /*
-         * STATUS
-         */
-
-        setStatus(
-          '✅ Student verified. Ready to record.',
-          'success'
-        );
-
-
-      }
-
-      finally {
-
-        delete window[callbackName];
-
-      }
-
-    };
-
-
-  /*
-   * CREATE SCRIPT REQUEST
-   */
-
-  const script =
-    document.createElement('script');
-
-
-  script.src =
-    API_URL +
-    '?action=lookup' +
-    '&studentId=' +
-    encodeURIComponent(studentId) +
-    '&callback=' +
-    callbackName;
-
-
-  script.onerror =
-    function() {
-
-      delete window[callbackName];
-
-      showError(
-        'Could not connect to Google Sheets.'
-      );
-
-    };
-
-
-  document.body.appendChild(script);
+    );
 
 }
 
 
-/*
-==================================================
-ADD RECITATION POINT
-==================================================
-*/
+
+/* =========================================================
+   ADD POINT
+   ========================================================= */
+
 
 function addPoint() {
 
 
-  if (!currentStudentId) {
+    if (!currentStudent) {
 
-    return;
+        return;
 
-  }
+    }
 
 
-  const button =
-    document.getElementById(
-      'pointButton'
+    const button =
+        document.getElementById(
+            "addButton"
+        );
+
+
+    button.disabled = true;
+
+    button.textContent =
+        "⏳ Adding point...";
+
+
+    showStatus(
+        "⏳ Saving recitation point...",
+        "info"
     );
 
 
-  /*
-   * Prevent double clicking
-   */
-
-  button.disabled = true;
-
-  button.textContent =
-    'ADDING POINT...';
+    apiRequest(
+        "addPoint",
+        currentStudent.studentId,
+        function(result) {
 
 
-  setStatus(
-    '⏳ Recording recitation point...'
-  );
+            if (!result.success) {
+
+                button.disabled = false;
+
+                button.textContent =
+                    "➕ +1 RECITATION POINT";
 
 
-  const callbackName =
-    'addPoint_' +
-    Date.now();
+                showStatus(
+                    "❌ " + result.error,
+                    "error"
+                );
+
+                return;
+
+            }
 
 
-  window[callbackName] =
-    function(data) {
-
-      try {
+            currentStudent = result;
 
 
-        /*
-         * ERROR
-         */
+            document.getElementById(
+                "points"
+            ).textContent =
+                result.points;
 
-        if (!data || !data.success) {
 
-          showError(
-            data && data.error
-              ? data.error
-              : 'Could not add point.'
-          );
+            button.disabled = true;
 
-          button.disabled = false;
+            button.textContent =
+                "✅ POINT ADDED";
 
-          button.textContent =
-            '+1 RECITATION POINT';
 
-          return;
+            showStatus(
+                "✅ 1 recitation point added for " +
+                result.studentName +
+                "!",
+                "success"
+            );
+
+        }
+    );
+
+}
+
+
+
+/* =========================================================
+   START CAMERA
+   ========================================================= */
+
+
+async function startScanner() {
+
+
+    showStatus(
+        "📷 Starting camera...",
+        "info"
+    );
+
+
+    try {
+
+
+        if (!window.isSecureContext) {
+
+            throw new Error(
+                "Camera requires a secure HTTPS connection."
+            );
 
         }
 
 
-        /*
-         * SUCCESS
-         */
+        if (!navigator.mediaDevices ||
+            !navigator.mediaDevices.getUserMedia) {
 
-        setStatus(
-          '🎉 +1 Recitation Point recorded!',
-          'success'
+            throw new Error(
+                "This browser does not support camera access."
+            );
+
+        }
+
+
+        scanner =
+            new Html5Qrcode(
+                "reader"
+            );
+
+
+        const config = {
+
+            fps: 10,
+
+            qrbox: {
+                width: 280,
+                height: 280
+            },
+
+            aspectRatio: 1.0
+
+        };
+
+
+        await scanner.start(
+
+            {
+                facingMode: "environment"
+            },
+
+            config,
+
+            function(decodedText) {
+
+                if (scanningLocked) {
+
+                    return;
+
+                }
+
+
+                scanningLocked = true;
+
+
+                lookupStudent(
+                    decodedText.trim()
+                );
+
+            },
+
+            function(errorMessage) {
+
+                // Ignore normal scanning messages.
+
+            }
+
         );
 
 
-        /*
-         * SHOW NEW POINT TOTAL
-         */
-
-        document.getElementById(
-          'pointsDisplay'
-        ).textContent =
-          'Term 2 Points: ' +
-          data.points;
-
-
-        /*
-         * CHANGE BUTTON
-         */
-
-        button.textContent =
-          '✓ POINT ADDED';
-
-
-        /*
-         * Prepare for next student
-         */
-
-        setTimeout(
-          resetScanner,
-          1800
+        showStatus(
+            "📷 Camera ready — scan the student's QR code.",
+            "info"
         );
 
 
-      }
+    } catch (error) {
 
-      finally {
 
-        delete window[callbackName];
+        console.error(
+            "Camera error:",
+            error
+        );
 
-      }
 
-    };
+        let message =
+            "⚠️ Camera could not start.";
 
 
-  /*
-   * CREATE ADD POINT REQUEST
-   */
+        if (
+            error &&
+            error.message
+        ) {
 
-  const script =
-    document.createElement('script');
+            message +=
+                " " +
+                error.message;
 
+        }
 
-  script.src =
-    API_URL +
-    '?action=addPoint' +
-    '&studentId=' +
-    encodeURIComponent(
-      currentStudentId
-    ) +
-    '&callback=' +
-    callbackName;
 
+        message +=
+            " Please allow camera access and reload the page.";
 
-  script.onerror =
-    function() {
 
-      delete window[callbackName];
-
-
-      showError(
-        'Could not connect to Google Sheets.'
-      );
-
-
-      button.disabled = false;
-
-      button.textContent =
-        '+1 RECITATION POINT';
-
-    };
-
-
-  document.body.appendChild(script);
-
-}
-
-
-/*
-==================================================
-SHOW ERROR
-==================================================
-*/
-
-function showError(message) {
-
-
-  setStatus(
-    '⚠️ ' + message,
-    'error'
-  );
-
-
-  const button =
-    document.getElementById(
-      'pointButton'
-    );
-
-
-  button.disabled = true;
-
-  button.textContent =
-    '+1 RECITATION POINT';
-
-
-  setTimeout(
-    resetScanner,
-    2000
-  );
-
-}
-
-
-/*
-==================================================
-RESET FOR NEXT STUDENT
-==================================================
-*/
-
-function resetScanner() {
-
-
-  currentStudentId = '';
-
-  currentStudent = null;
-
-  scanningLocked = false;
-
-
-  /*
-   * Hide student card
-   */
-
-  document.getElementById(
-    'studentCard'
-  ).classList.remove('show');
-
-
-  /*
-   * Clear information
-   */
-
-  document.getElementById(
-    'studentId'
-  ).textContent = '—';
-
-
-  document.getElementById(
-    'studentName'
-  ).textContent = '—';
-
-
-  document.getElementById(
-    'studentSection'
-  ).textContent = '—';
-
-
-  document.getElementById(
-    'pointsDisplay'
-  ).textContent = '';
-
-
-  /*
-   * Reset button
-   */
-
-  const button =
-    document.getElementById(
-      'pointButton'
-    );
-
-
-  button.disabled = true;
-
-  button.textContent =
-    '+1 RECITATION POINT';
-
-
-  /*
-   * Status
-   */
-
-  setStatus(
-    '📷 Ready — scan the next student.'
-  );
-
-
-  /*
-   * Resume camera
-   */
-
-  try {
-
-    if (scanner) {
-
-      scanner.resume();
+        showStatus(
+            message,
+            "error"
+        );
 
     }
 
-  }
+}
 
-  catch (error) {
 
-    console.log(error);
 
-  }
+/* =========================================================
+   RESET
+   ========================================================= */
+
+
+async function resetScanner() {
+
+
+    currentStudent = null;
+
+    scanningLocked = false;
+
+
+    document.getElementById(
+        "studentCard"
+    ).classList.remove("show");
+
+
+    const button =
+        document.getElementById(
+            "addButton"
+        );
+
+
+    button.disabled = false;
+
+    button.textContent =
+        "➕ +1 RECITATION POINT";
+
+
+    showStatus(
+        "📷 Scan another student's QR code.",
+        "info"
+    );
 
 }
 
 
-/*
-==================================================
-START WHEN PAGE LOADS
-==================================================
-*/
+
+/* =========================================================
+   START
+   ========================================================= */
+
 
 window.addEventListener(
-  'load',
-  function() {
+    "load",
+    function() {
 
-    startScanner();
+        setTimeout(
+            startScanner,
+            500
+        );
 
-  }
+    }
 );
 
+
 </script>
+
 
 </body>
 
