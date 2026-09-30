@@ -1,5 +1,4 @@
 <!DOCTYPE html>
-
 <html lang="en">
 
 <head>
@@ -9,17 +8,11 @@
 <meta name="viewport"
       content="width=device-width, initial-scale=1.0">
 
-<title>
-Grade 10 – Marangal Term 2 Recitation
-</title>
-
-
-<!-- QR SCANNER LIBRARY -->
+<title>Grade 10 – Marangal Term 2 Recitation</title>
 
 <script src="https://unpkg.com/html5-qrcode"
         type="text/javascript">
 </script>
-
 
 <style>
 
@@ -27,267 +20,141 @@ Grade 10 – Marangal Term 2 Recitation
     box-sizing: border-box;
 }
 
-
 body {
-
     margin: 0;
-
     padding: 20px;
-
-    font-family:
-        Arial,
-        Helvetica,
-        sans-serif;
-
-    background:
-        #f3f3f3;
-
-    color:
-        #111;
-
+    font-family: Arial, Helvetica, sans-serif;
+    background: #f3f3f3;
+    color: #111;
 }
-
 
 .container {
-
     width: 100%;
-
     max-width: 970px;
-
     margin: auto;
-
 }
-
 
 /* HEADER */
 
 .header {
-
     background: white;
-
     border-radius: 28px;
-
     padding: 42px 25px;
-
     text-align: center;
-
-    box-shadow:
-        0 8px 25px rgba(0,0,0,0.08);
-
+    box-shadow: 0 8px 25px rgba(0,0,0,0.08);
     margin-bottom: 30px;
-
 }
-
 
 .header h1 {
-
     margin: 0;
-
     font-size: 42px;
-
 }
-
 
 .header h2 {
-
     margin: 15px 0 0;
-
     font-size: 32px;
-
     font-weight: 400;
-
     color: #666;
-
 }
 
+/* CARD */
+
+.card {
+    background: white;
+    border-radius: 28px;
+    padding: 30px;
+    box-shadow: 0 8px 25px rgba(0,0,0,0.08);
+    margin-bottom: 25px;
+}
 
 /* CAMERA */
 
-.card {
-
-    background: white;
-
-    border-radius: 28px;
-
-    padding: 30px;
-
-    box-shadow:
-        0 8px 25px rgba(0,0,0,0.08);
-
-    margin-bottom: 25px;
-
-}
-
-
 #reader {
-
     width: 100%;
-
     max-width: 650px;
-
     margin: auto;
-
 }
-
 
 /* STATUS */
 
 .status {
-
-    display: none;
-
+    display: block;
     padding: 22px;
-
     border-radius: 18px;
-
     text-align: center;
-
     font-size: 22px;
-
     font-weight: bold;
-
     margin-bottom: 20px;
-
 }
-
 
 .status.error {
-
-    display: block;
-
     background: #f8d7da;
-
     color: #842029;
-
 }
-
 
 .status.success {
-
-    display: block;
-
     background: #d1e7dd;
-
     color: #0f5132;
-
 }
-
 
 .status.info {
-
-    display: block;
-
     background: #fff3cd;
-
     color: #664d03;
-
 }
-
 
 /* STUDENT */
 
 .student {
-
     display: none;
-
 }
-
 
 .student.show {
-
     display: block;
-
 }
-
 
 .student-box {
-
     background: #f8f9fa;
-
     border-radius: 20px;
-
     padding: 25px;
-
     margin-bottom: 20px;
-
 }
-
 
 .label {
-
     font-size: 15px;
-
     color: #777;
-
     margin-top: 10px;
-
 }
-
 
 .value {
-
     font-size: 26px;
-
     font-weight: bold;
-
     margin-top: 4px;
-
     word-break: break-word;
-
 }
-
 
 /* BUTTON */
 
 button {
-
     width: 100%;
-
     border: none;
-
     border-radius: 18px;
-
     padding: 22px;
-
     font-size: 23px;
-
     font-weight: bold;
-
     cursor: pointer;
-
     background: #198754;
-
     color: white;
-
 }
-
-
-button:hover {
-
-    opacity: 0.9;
-
-}
-
 
 button:disabled {
-
     background: #999;
-
     cursor: not-allowed;
-
 }
-
-
-/* RESET */
 
 .reset {
-
     background: #555;
-
     margin-top: 12px;
-
 }
-
 
 /* MOBILE */
 
@@ -361,7 +228,6 @@ button:disabled {
 
         </div>
 
-
         <div id="reader"></div>
 
     </div>
@@ -373,9 +239,7 @@ button:disabled {
     <div id="studentCard"
          class="card student">
 
-
         <div class="student-box">
-
 
             <div class="label">
                 STUDENT ID
@@ -416,7 +280,6 @@ button:disabled {
         </div>
 
 
-
         <button id="addButton"
                 onclick="addPoint()">
 
@@ -432,7 +295,6 @@ button:disabled {
 
         </button>
 
-
     </div>
 
 
@@ -444,13 +306,16 @@ button:disabled {
 
 
 /* =========================================================
-   CONFIGURATION
+   GOOGLE APPS SCRIPT API
    ========================================================= */
-
 
 const API_URL =
 "https://script.google.com/macros/s/AKfycbwkvTyEFdtkxzmUa372TpCNbMByAc-_h89ooxydU_D68S43eEx6S15QZb7mJAwITTKZ3g/exec";
 
+
+/* =========================================================
+   VARIABLES
+   ========================================================= */
 
 let scanner = null;
 
@@ -459,11 +324,9 @@ let currentStudent = null;
 let scanningLocked = false;
 
 
-
 /* =========================================================
-   STATUS
+   STATUS MESSAGE
    ========================================================= */
-
 
 function showStatus(message, type) {
 
@@ -478,14 +341,11 @@ function showStatus(message, type) {
 }
 
 
-
 /* =========================================================
-   JSONP REQUEST
+   API REQUEST
    ========================================================= */
 
-
 function apiRequest(action, studentId, callback) {
-
 
     const callbackName =
         "apiCallback_" +
@@ -504,13 +364,15 @@ function apiRequest(action, studentId, callback) {
             cleanup();
 
             callback({
+
                 success: false,
+
                 error:
                     "The server took too long to respond."
+
             });
 
         }, 15000);
-
 
 
     function cleanup() {
@@ -528,7 +390,6 @@ function apiRequest(action, studentId, callback) {
     }
 
 
-
     window[callbackName] =
         function(result) {
 
@@ -537,7 +398,6 @@ function apiRequest(action, studentId, callback) {
             callback(result);
 
         };
-
 
 
     script.onerror =
@@ -557,7 +417,6 @@ function apiRequest(action, studentId, callback) {
         };
 
 
-
     script.src =
         API_URL +
         "?action=" +
@@ -575,31 +434,168 @@ function apiRequest(action, studentId, callback) {
 }
 
 
+/* =========================================================
+   EXTRACT STUDENT ID FROM QR CODE
+   =========================================================
+   
+   This accepts BOTH:
+
+   MARANGAL-002
+
+   AND:
+
+   https://example.com/?id=MARANGAL-002
+
+   ========================================================= */
+
+function extractStudentId(qrText) {
+
+    let studentId =
+        String(qrText || "").trim();
+
+
+    /* -----------------------------------------
+       CASE 1:
+       QR contains a URL
+       ----------------------------------------- */
+
+    if (
+        studentId.startsWith("http://") ||
+        studentId.startsWith("https://")
+    ) {
+
+        try {
+
+            const qrUrl =
+                new URL(studentId);
+
+
+            /* Look for ?id=MARANGAL-002 */
+
+            const idParameter =
+                qrUrl.searchParams.get("id");
+
+
+            if (idParameter) {
+
+                studentId =
+                    idParameter.trim();
+
+            }
+
+
+            /* If there is no ?id=,
+               try the last part of the URL */
+
+            else {
+
+                const parts =
+                    qrUrl.pathname
+                        .split("/")
+                        .filter(Boolean);
+
+
+                if (parts.length > 0) {
+
+                    studentId =
+                        parts[parts.length - 1]
+                            .trim();
+
+                }
+
+            }
+
+        }
+
+        catch (error) {
+
+            console.log(
+                "Could not read QR URL."
+            );
+
+        }
+
+    }
+
+
+    /* -----------------------------------------
+       CLEAN COMMON EXTRA CHARACTERS
+       ----------------------------------------- */
+
+    studentId =
+        studentId
+            .replace(/^id=/i, "")
+            .trim();
+
+
+    return studentId;
+
+}
+
 
 /* =========================================================
    LOOKUP STUDENT
    ========================================================= */
 
+function lookupStudent(qrText) {
 
-function lookupStudent(studentId) {
+
+    /* -----------------------------------------
+       EXTRACT ACTUAL STUDENT ID
+       ----------------------------------------- */
+
+    const studentId =
+        extractStudentId(qrText);
+
+
+    console.log(
+        "QR scanned:",
+        qrText
+    );
+
+
+    console.log(
+        "Student ID extracted:",
+        studentId
+    );
+
+
+    if (!studentId) {
+
+        showStatus(
+            "❌ No student ID was found in the QR code.",
+            "error"
+        );
+
+        scanningLocked = false;
+
+        return;
+
+    }
 
 
     showStatus(
-        "🔎 Looking up student...",
+        "🔎 Looking up " +
+        studentId +
+        "...",
         "info"
     );
 
 
     apiRequest(
+
         "lookup",
+
         studentId,
+
         function(result) {
 
 
             if (!result.success) {
 
                 showStatus(
-                    "❌ " + result.error,
+                    "❌ " +
+                    result.error,
                     "error"
                 );
 
@@ -610,8 +606,17 @@ function lookupStudent(studentId) {
             }
 
 
-            currentStudent = result;
+            /* -----------------------------------------
+               SAVE STUDENT
+               ----------------------------------------- */
 
+            currentStudent =
+                result;
+
+
+            /* -----------------------------------------
+               DISPLAY INFORMATION
+               ----------------------------------------- */
 
             document.getElementById(
                 "studentId"
@@ -642,23 +647,25 @@ function lookupStudent(studentId) {
             ).classList.add("show");
 
 
+            /* -----------------------------------------
+               SUCCESS
+               ----------------------------------------- */
+
             showStatus(
                 "✅ Student found!",
                 "success"
             );
 
-
         }
+
     );
 
 }
 
 
-
 /* =========================================================
-   ADD POINT
+   ADD RECITATION POINT
    ========================================================= */
-
 
 function addPoint() {
 
@@ -689,21 +696,26 @@ function addPoint() {
 
 
     apiRequest(
+
         "addPoint",
+
         currentStudent.studentId,
+
         function(result) {
 
 
             if (!result.success) {
 
-                button.disabled = false;
+                button.disabled =
+                    false;
 
                 button.textContent =
                     "➕ +1 RECITATION POINT";
 
 
                 showStatus(
-                    "❌ " + result.error,
+                    "❌ " +
+                    result.error,
                     "error"
                 );
 
@@ -712,7 +724,12 @@ function addPoint() {
             }
 
 
-            currentStudent = result;
+            /* -----------------------------------------
+               UPDATE DISPLAYED POINTS
+               ----------------------------------------- */
+
+            currentStudent =
+                result;
 
 
             document.getElementById(
@@ -721,30 +738,40 @@ function addPoint() {
                 result.points;
 
 
+            /* -----------------------------------------
+               BUTTON
+               ----------------------------------------- */
+
             button.disabled = true;
 
             button.textContent =
                 "✅ POINT ADDED";
 
 
+            /* -----------------------------------------
+               SUCCESS
+               ----------------------------------------- */
+
             showStatus(
+
                 "✅ 1 recitation point added for " +
                 result.studentName +
                 "!",
+
                 "success"
+
             );
 
         }
+
     );
 
 }
 
 
-
 /* =========================================================
    START CAMERA
    ========================================================= */
-
 
 async function startScanner() {
 
@@ -758,6 +785,10 @@ async function startScanner() {
     try {
 
 
+        /* -----------------------------------------
+           CHECK HTTPS
+           ----------------------------------------- */
+
         if (!window.isSecureContext) {
 
             throw new Error(
@@ -767,8 +798,14 @@ async function startScanner() {
         }
 
 
-        if (!navigator.mediaDevices ||
-            !navigator.mediaDevices.getUserMedia) {
+        /* -----------------------------------------
+           CHECK CAMERA SUPPORT
+           ----------------------------------------- */
+
+        if (
+            !navigator.mediaDevices ||
+            !navigator.mediaDevices.getUserMedia
+        ) {
 
             throw new Error(
                 "This browser does not support camera access."
@@ -776,6 +813,10 @@ async function startScanner() {
 
         }
 
+
+        /* -----------------------------------------
+           CREATE SCANNER
+           ----------------------------------------- */
 
         scanner =
             new Html5Qrcode(
@@ -797,6 +838,10 @@ async function startScanner() {
         };
 
 
+        /* -----------------------------------------
+           START REAR CAMERA
+           ----------------------------------------- */
+
         await scanner.start(
 
             {
@@ -805,7 +850,13 @@ async function startScanner() {
 
             config,
 
+
+            /* -----------------------------------------
+               QR SUCCESS
+               ----------------------------------------- */
+
             function(decodedText) {
+
 
                 if (scanningLocked) {
 
@@ -814,18 +865,27 @@ async function startScanner() {
                 }
 
 
-                scanningLocked = true;
+                scanningLocked =
+                    true;
 
 
                 lookupStudent(
-                    decodedText.trim()
+                    decodedText
                 );
 
             },
 
+
+            /* -----------------------------------------
+               QR SCANNING ERRORS
+               ----------------------------------------- */
+
             function(errorMessage) {
 
-                // Ignore normal scanning messages.
+                /*
+                   Normal scanning messages
+                   are intentionally ignored.
+                */
 
             }
 
@@ -838,7 +898,10 @@ async function startScanner() {
         );
 
 
-    } catch (error) {
+    }
+
+
+    catch (error) {
 
 
         console.error(
@@ -877,18 +940,19 @@ async function startScanner() {
 }
 
 
-
 /* =========================================================
-   RESET
+   RESET FOR NEXT STUDENT
    ========================================================= */
-
 
 async function resetScanner() {
 
 
-    currentStudent = null;
+    currentStudent =
+        null;
 
-    scanningLocked = false;
+
+    scanningLocked =
+        false;
 
 
     document.getElementById(
@@ -902,7 +966,9 @@ async function resetScanner() {
         );
 
 
-    button.disabled = false;
+    button.disabled =
+        false;
+
 
     button.textContent =
         "➕ +1 RECITATION POINT";
@@ -916,11 +982,9 @@ async function resetScanner() {
 }
 
 
-
 /* =========================================================
-   START
+   START EVERYTHING
    ========================================================= */
-
 
 window.addEventListener(
     "load",
@@ -933,7 +997,6 @@ window.addEventListener(
 
     }
 );
-
 
 </script>
 
